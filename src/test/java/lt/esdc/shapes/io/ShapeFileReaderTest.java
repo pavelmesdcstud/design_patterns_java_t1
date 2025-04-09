@@ -25,7 +25,8 @@ class ShapeFileReaderTest {
             -1,-1;1,-1;1,1;-1,1""";
         Path file = createTempFile(content);
 
-        ShapeFileReader<Quadrilateral> reader = new ShapeFileReader<>(file, new QuadrilateralStringReader());
+        ShapeFileReader<Quadrilateral> reader = new ShapeFileReader<>(file,
+            new QuadrilateralStringParser());
         List<Quadrilateral> shapes = reader.readShapes();
 
         assertEquals(3, shapes.size());
@@ -39,7 +40,8 @@ class ShapeFileReaderTest {
             0,0;2,0;2,1;0,1""";
         Path file = createTempFile(content);
 
-        ShapeFileReader<Quadrilateral> reader = new ShapeFileReader<>(file, new QuadrilateralStringReader());
+        ShapeFileReader<Quadrilateral> reader = new ShapeFileReader<>(file,
+            new QuadrilateralStringParser());
         List<Quadrilateral> shapes = reader.readShapes();
 
         assertEquals(2, shapes.size());
@@ -49,7 +51,8 @@ class ShapeFileReaderTest {
     void testEmptyFile() throws IOException {
         Path file = createTempFile("");
 
-        ShapeFileReader<Quadrilateral> reader = new ShapeFileReader<>(file, new QuadrilateralStringReader());
+        ShapeFileReader<Quadrilateral> reader = new ShapeFileReader<>(file,
+            new QuadrilateralStringParser());
         List<Quadrilateral> shapes = reader.readShapes();
 
         assertTrue(shapes.isEmpty());
@@ -58,7 +61,8 @@ class ShapeFileReaderTest {
     @Test
     void testNonExistentFile() {
         Path nonExistentFile = tempDir.resolve("non_existent.txt");
-        ShapeFileReader<Quadrilateral> reader = new ShapeFileReader<>(nonExistentFile, new QuadrilateralStringReader());
+        ShapeFileReader<Quadrilateral> reader = new ShapeFileReader<>(nonExistentFile,
+            new QuadrilateralStringParser());
 
         assertThrows(RuntimeException.class, reader::readShapes);
     }

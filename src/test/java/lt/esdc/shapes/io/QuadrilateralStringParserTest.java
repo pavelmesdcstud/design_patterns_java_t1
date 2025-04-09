@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class QuadrilateralStringReaderTest {
+class QuadrilateralStringParserTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
@@ -19,8 +19,8 @@ class QuadrilateralStringReaderTest {
         "0,0;3,0;2,2;1,2"                     // Irregular quadrilateral
     })
     void testValidQuadrilaterals(String input) {
-        QuadrilateralStringReader reader = new QuadrilateralStringReader();
-        assertDoesNotThrow(() -> reader.read(input),
+        QuadrilateralStringParser reader = new QuadrilateralStringParser();
+        assertDoesNotThrow(() -> reader.parse(input),
             "Expected no exception for valid quadrilateral: " + input);
     }
 
@@ -38,15 +38,15 @@ class QuadrilateralStringReaderTest {
         "0,0,1,0,1,1,0,1"                     // Wrong format
     })
     void testInvalidQuadrilaterals(String input) {
-        QuadrilateralStringReader reader = new QuadrilateralStringReader();
-        assertThrows(MalformedInputStringException.class, () -> reader.read(input),
+        QuadrilateralStringParser reader = new QuadrilateralStringParser();
+        assertThrows(MalformedInputStringException.class, () -> reader.parse(input),
             "Expected MalformedInputStringException for invalid quadrilateral: " + input);
     }
 
     @Test
     void testNullInput() {
-        QuadrilateralStringReader reader = new QuadrilateralStringReader();
-        assertThrows(MalformedInputStringException.class, () -> reader.read(null),
+        QuadrilateralStringParser reader = new QuadrilateralStringParser();
+        assertThrows(MalformedInputStringException.class, () -> reader.parse(null),
             "Expected MalformedInputStringException for null input");
     }
 }

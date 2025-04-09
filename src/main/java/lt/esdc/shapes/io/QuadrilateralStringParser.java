@@ -12,15 +12,15 @@ import lt.esdc.shapes.validator.QuadrilateralDataValidator;
 import lt.esdc.shapes.validator.QuadrilateralInputStringValidator;
 import lt.esdc.shapes.validator.ShapeDataValidator;
 
-public class QuadrilateralStringReader implements StringReader<Quadrilateral> {
+public class QuadrilateralStringParser implements StringParser<Quadrilateral> {
 
   private final InputStringValidator inputStringValidator = new QuadrilateralInputStringValidator();
   private final ShapeDataValidator quadrilateralDataValidator = new QuadrilateralDataValidator();
-  private final PointStringReader pointReader = new PointStringReader();
+  private final PointStringParser pointReader = new PointStringParser();
   private final ShapeFactory<Quadrilateral> quadrilateralShapeFactory = new QuadrilateralFactory();
 
   @Override
-  public Quadrilateral read(String shapeData) throws MalformedInputStringException {
+  public Quadrilateral parse(String shapeData) throws MalformedInputStringException {
     if (shapeData == null || !inputStringValidator.test(shapeData)) {
       throw new MalformedInputStringException("Invalid input string: " + shapeData);
     }
@@ -32,7 +32,7 @@ public class QuadrilateralStringReader implements StringReader<Quadrilateral> {
       }
       String str = pt.trim();
       try {
-        points.add(pointReader.read(str));
+        points.add(pointReader.parse(str));
       } catch (MalformedInputStringException e) {
         throw new MalformedInputStringException("Invalid point data: " + str, e);
       } catch (RuntimeException e) {

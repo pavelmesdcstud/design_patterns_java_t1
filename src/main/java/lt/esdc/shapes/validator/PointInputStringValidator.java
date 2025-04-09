@@ -1,6 +1,5 @@
 package lt.esdc.shapes.validator;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PointInputStringValidator implements InputStringValidator {
@@ -12,7 +11,6 @@ public class PointInputStringValidator implements InputStringValidator {
     if (s == null) {
       return false;
     }
-    Matcher matcher = Pattern.compile(POINT_REGEX).matcher(s);
-    return matcher.find();
+    return Pattern.matches(POINT_REGEX, s);
   }
 }

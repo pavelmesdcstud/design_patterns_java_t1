@@ -4,11 +4,11 @@ import lt.esdc.shapes.entity.Point;
 import lt.esdc.shapes.exception.MalformedInputStringException;
 import lt.esdc.shapes.validator.PointInputStringValidator;
 
-public class PointStringReader implements StringReader<Point> {
+public class PointStringParser implements StringParser<Point> {
   private final PointInputStringValidator inputStringValidator = new PointInputStringValidator();
 
   @Override
-  public Point read(String shapeData) throws MalformedInputStringException {
+  public Point parse(String shapeData) throws MalformedInputStringException {
     if (!inputStringValidator.test(shapeData)) {
       throw new MalformedInputStringException("Invalid input string: " + shapeData);
     }

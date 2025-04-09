@@ -2,13 +2,12 @@ package lt.esdc.shapes.entity;
 
 import java.util.List;
 import java.util.Objects;
-import lt.esdc.shapes.exception.IllegalArgumentsException;
 
 public record Quadrilateral(String id, List<Point> points) implements Shape {
 
   public Quadrilateral(String id, List<Point> points) {
     if (points == null || points.size() != 4) {
-      throw new IllegalArgumentsException("Quadrilateral must have exactly 4 points.");
+      throw new IllegalArgumentException("Quadrilateral must have exactly 4 points.");
     }
     this.points = List.copyOf(points);
     this.id = Objects.requireNonNull(id, "ID cannot be null");
@@ -34,11 +33,5 @@ public record Quadrilateral(String id, List<Point> points) implements Shape {
   @Override
   public String toString() {
     return "Quadrilateral{" + "id='" + id + '\'' + ", points=" + points + '}';
-  }
-
-  @Override
-  public String serialize() {
-    return getP1().serialize() + ";" + getP2().serialize() + ";" + getP3().serialize() + ";"
-        + getP4().serialize();
   }
 }

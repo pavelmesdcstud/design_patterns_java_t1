@@ -14,10 +14,10 @@ import org.slf4j.LoggerFactory;
 public class ShapeFileReader<S extends Shape> implements ShapeReader<S> {
 
   private final Path path;
-  private final StringReader<S> reader;
+  private final StringParser<S> reader;
   private final Logger logger = LoggerFactory.getLogger(ShapeFileReader.class);
 
-  public ShapeFileReader(Path path, StringReader<S> reader) {
+  public ShapeFileReader(Path path, StringParser<S> reader) {
     this.path = path;
     this.reader = reader;
   }
@@ -28,7 +28,7 @@ public class ShapeFileReader<S extends Shape> implements ShapeReader<S> {
     try (Stream<String> stream = Files.lines(path)) {
       return stream.map(str -> {
         try {
-          return reader.read(str);
+          return reader.parse(str);
         } catch (MalformedInputStringException e) {
           logger.error("Shape reading failed for input string `{}`", str, e);
           return null;

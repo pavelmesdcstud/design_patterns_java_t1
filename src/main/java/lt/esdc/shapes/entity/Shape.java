@@ -8,5 +8,4 @@ public interface Shape {
 
   List<Point> points();
 
-  String serialize();
 }
