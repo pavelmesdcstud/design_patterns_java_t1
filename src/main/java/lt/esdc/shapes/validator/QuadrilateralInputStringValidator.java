@@ -1,6 +1,7 @@
 package lt.esdc.shapes.validator;
 
 public class QuadrilateralInputStringValidator implements InputStringValidator {
+
   private final PointInputStringValidator pointInputStringValidator = new PointInputStringValidator();
 
   @Override

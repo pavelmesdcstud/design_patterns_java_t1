@@ -8,6 +8,7 @@ import lt.esdc.shapes.validator.QuadrilateralDataValidator;
 import lt.esdc.shapes.validator.ShapeDataValidator;
 
 public class QuadrilateralFactory implements ShapeFactory<Quadrilateral> {
+
   private final ShapeDataValidator shapeDataValidator = new QuadrilateralDataValidator();
 
   @Override

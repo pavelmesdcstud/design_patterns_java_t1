@@ -8,14 +8,11 @@ import lt.esdc.shapes.exception.MalformedInputStringException;
 import lt.esdc.shapes.factory.QuadrilateralFactory;
 import lt.esdc.shapes.factory.ShapeFactory;
 import lt.esdc.shapes.validator.InputStringValidator;
-import lt.esdc.shapes.validator.QuadrilateralDataValidator;
 import lt.esdc.shapes.validator.QuadrilateralInputStringValidator;
-import lt.esdc.shapes.validator.ShapeDataValidator;
 
 public class QuadrilateralStringParser implements StringParser<Quadrilateral> {
 
   private final InputStringValidator inputStringValidator = new QuadrilateralInputStringValidator();
-  private final ShapeDataValidator quadrilateralDataValidator = new QuadrilateralDataValidator();
   private final PointStringParser pointReader = new PointStringParser();
   private final ShapeFactory<Quadrilateral> quadrilateralShapeFactory = new QuadrilateralFactory();
 
@@ -41,9 +38,6 @@ public class QuadrilateralStringParser implements StringParser<Quadrilateral> {
     }
     if (points.size() != 4) {
       throw new MalformedInputStringException("Invalid quadrilateral data: " + shapeData);
-    }
-    if (!quadrilateralDataValidator.test(points)) {
-      throw new MalformedInputStringException("Invalid quadrilateral data: " + points);
     }
     return quadrilateralShapeFactory.create(points);
   }

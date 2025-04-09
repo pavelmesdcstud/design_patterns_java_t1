@@ -6,13 +6,12 @@ import lt.esdc.shapes.entity.Quadrilateral;
 
 public class QuadrilateralService {
 
+  private static final double EPSILON = 1e-9;
   private final PointService pointService; // todo: not sure if that's correct
 
   public QuadrilateralService(PointService pointService) {
     this.pointService = pointService;
   }
-
-  private static final double EPSILON = 1e-9;
 
   public double calculatePerimeter(Quadrilateral quad) {
     List<Point> p = quad.points();

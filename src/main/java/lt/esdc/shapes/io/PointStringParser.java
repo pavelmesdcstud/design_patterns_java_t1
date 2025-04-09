@@ -5,6 +5,7 @@ import lt.esdc.shapes.exception.MalformedInputStringException;
 import lt.esdc.shapes.validator.PointInputStringValidator;
 
 public class PointStringParser implements StringParser<Point> {
+
   private final PointInputStringValidator inputStringValidator = new PointInputStringValidator();
 
   @Override

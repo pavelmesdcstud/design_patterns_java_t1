@@ -5,6 +5,7 @@ import lt.esdc.shapes.entity.Point;
 import lt.esdc.shapes.service.PointService;
 
 public class QuadrilateralDataValidator implements ShapeDataValidator {
+
   private final PointService pointService;
 
   public QuadrilateralDataValidator() {
