@@ -3,7 +3,7 @@ package lt.esdc.shapes.io;
 import java.util.List;
 import lt.esdc.shapes.entity.Shape;
 
-public interface ShapeReader<S extends Shape> {
+public interface ShapeReader<T extends Shape> {
 
-  List<S> readShapes();
+  List<T> readShapes();
 }

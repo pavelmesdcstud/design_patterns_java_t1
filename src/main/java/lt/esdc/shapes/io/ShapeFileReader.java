@@ -11,19 +11,19 @@ import lt.esdc.shapes.exception.MalformedInputStringException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ShapeFileReader<S extends Shape> implements ShapeReader<S> {
+public class ShapeFileReader<T extends Shape> implements ShapeReader<T> {
 
   private final Path path;
-  private final StringParser<S> reader;
+  private final StringParser<T> reader;
   private final Logger logger = LoggerFactory.getLogger(ShapeFileReader.class);
 
-  public ShapeFileReader(Path path, StringParser<S> reader) {
+  public ShapeFileReader(Path path, StringParser<T> reader) {
     this.path = path;
     this.reader = reader;
   }
 
   @Override
-  public List<S> readShapes() {
+  public List<T> readShapes() {
 
     try (Stream<String> stream = Files.lines(path)) {
       return stream.map(str -> {

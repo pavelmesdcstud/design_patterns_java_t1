@@ -2,8 +2,8 @@ package lt.esdc.shapes.io;
 
 import lt.esdc.shapes.exception.MalformedInputStringException;
 
-public interface StringParser<S> {
+public interface StringParser<T> {
 
-  S parse(String shapeData) throws MalformedInputStringException;
+  T parse(String shapeData) throws MalformedInputStringException;
 
 }
