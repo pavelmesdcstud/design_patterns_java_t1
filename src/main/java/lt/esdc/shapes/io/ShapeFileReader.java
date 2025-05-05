@@ -29,7 +29,7 @@ public class ShapeFileReader<T extends Shape> implements ShapeReader<T> {
       return stream.map(str -> {
         try {
           return reader.parse(str);
-        } catch (MalformedInputStringException e) {
+        } catch (MalformedInputStringException | IllegalArgumentException e) {
           logger.error("Shape reading failed for input string `{}`", str, e);
           return null;
         }
