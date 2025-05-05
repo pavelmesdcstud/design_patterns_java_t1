@@ -1,4 +1,4 @@
-package lt.esdc.shapes.io;
+package lt.esdc.shapes.parser;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;

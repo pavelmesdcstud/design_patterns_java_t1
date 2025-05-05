@@ -55,7 +55,8 @@ public class Warehouse implements ShapeObserver {
       calculateAndStoreParameters(quad);
       logger.debug("Registered parameters for shape ID: {}", shape.id());
     } else {
-      logger.warn("Warehouse currently only supports Quadrilateral parameters. Shape ID: {}", shape.id());
+      logger.warn("Warehouse currently only supports Quadrilateral parameters. Shape ID: {}",
+          shape.id());
       throw new IllegalArgumentException("Shape must be a Quadrilateral parameter");
     }
   }
@@ -73,8 +74,7 @@ public class Warehouse implements ShapeObserver {
 
 
   /**
-   * Observer method called when a shape changes.
-   * Recalculates and updates parameters in the cache.
+   * Observer method called when a shape changes. Recalculates and updates parameters in the cache.
    *
    * @param shape The shape that has changed.
    */

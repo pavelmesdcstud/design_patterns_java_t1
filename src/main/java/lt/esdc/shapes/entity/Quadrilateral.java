@@ -12,8 +12,8 @@ import lt.esdc.shapes.observer.ShapeObserver;
 public class Quadrilateral implements Shape, ObservableShape {
 
   private final String id;
-  private List<Point> points; // Make mutable
   private final List<ShapeObserver> observers; // Observer list
+  private List<Point> points; // Make mutable
 
   // Constructor
   public Quadrilateral(String id, List<Point> points) {
@@ -44,10 +44,21 @@ public class Quadrilateral implements Shape, ObservableShape {
     this.points = List.copyOf(newPoints);
   }
 
-  public Point getP1() { return points.get(0); }
-  public Point getP2() { return points.get(1); }
-  public Point getP3() { return points.get(2); }
-  public Point getP4() { return points.get(3); }
+  public Point getP1() {
+    return points.get(0);
+  }
+
+  public Point getP2() {
+    return points.get(1);
+  }
+
+  public Point getP3() {
+    return points.get(2);
+  }
+
+  public Point getP4() {
+    return points.get(3);
+  }
 
   @Override
   public void addObserver(ShapeObserver observer) {

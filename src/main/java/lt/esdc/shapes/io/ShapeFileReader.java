@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.stream.Stream;
 import lt.esdc.shapes.entity.Shape;
 import lt.esdc.shapes.exception.MalformedInputStringException;
+import lt.esdc.shapes.parser.StringParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

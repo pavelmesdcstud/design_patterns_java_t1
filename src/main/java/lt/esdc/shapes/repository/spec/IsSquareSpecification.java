@@ -3,10 +3,10 @@ package lt.esdc.shapes.repository.spec;
 import lt.esdc.shapes.entity.Quadrilateral;
 import lt.esdc.shapes.entity.Shape;
 import lt.esdc.shapes.repository.Specification;
-import lt.esdc.shapes.service.PointService;
 import lt.esdc.shapes.service.QuadrilateralService;
 
 public class IsSquareSpecification implements Specification<Shape> {
+
   private final QuadrilateralService quadService;
 
   public IsSquareSpecification(QuadrilateralService quadService) {

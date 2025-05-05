@@ -8,16 +8,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lt.esdc.shapes.entity.Shape;
 import lt.esdc.shapes.observer.ObservableShape;
-import lt.esdc.shapes.warehouse.Warehouse; // Import Warehouse
+import lt.esdc.shapes.warehouse.Warehouse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 /**
- * Singleton Repository to store Shape objects.
- * (Non-thread-safe Singleton implementation)
+ * Singleton Repository to store Shape objects. (Non-thread-safe Singleton implementation)
  */
 public class Repository {
+
   private static final Logger logger = LoggerFactory.getLogger(Repository.class);
   private static Repository instance;
   private final List<Shape> shapes;
@@ -39,14 +39,15 @@ public class Repository {
   }
 
   /**
-   * Adds a shape to the repository.
-   * Also registers the shape with the Warehouse and adds the Warehouse as an observer.
+   * Adds a shape to the repository. Also registers the shape with the Warehouse and adds the
+   * Warehouse as an observer.
    *
    * @param shape The shape to add.
    */
   public void add(Shape shape) {
     if (shape == null || contains(shape.id())) {
-      logger.warn("Attempted to add null shape or shape with duplicate ID: {}", shape != null ? shape.id() : "null");
+      logger.warn("Attempted to add null shape or shape with duplicate ID: {}",
+          shape != null ? shape.id() : "null");
       return; // Or throw exception
     }
     shapes.add(shape);
@@ -69,14 +70,16 @@ public class Repository {
   }
 
   /**
-   * Removes a shape from the repository.
-   * Also removes parameters from the Warehouse and removes the Warehouse as an observer.
+   * Removes a shape from the repository. Also removes parameters from the Warehouse and removes the
+   * Warehouse as an observer.
    *
    * @param shape The shape to remove.
    * @return true if the shape was removed, false otherwise.
    */
   public boolean remove(Shape shape) {
-    if (shape == null) return false;
+    if (shape == null) {
+      return false;
+    }
     return removeById(shape.id());
   }
 
@@ -117,6 +120,7 @@ public class Repository {
 
   /**
    * Checks if a shape with the given ID exists in the repository.
+   *
    * @param shapeId The shape ID.
    * @return true if exists, false otherwise.
    */
@@ -155,12 +159,14 @@ public class Repository {
   }
 
   public void sortByFirstPointX() {
-    shapes.sort(Comparator.comparingDouble(shape -> shape.points().isEmpty() ? Double.NaN : shape.points().get(0).x()));
+    shapes.sort(Comparator.comparingDouble(
+        shape -> shape.points().isEmpty() ? Double.NaN : shape.points().get(0).x()));
     logger.debug("Sorted shapes by First Point X coordinate.");
   }
 
   public void sortByFirstPointY() {
-    shapes.sort(Comparator.comparingDouble(shape -> shape.points().isEmpty() ? Double.NaN : shape.points().get(0).y()));
+    shapes.sort(Comparator.comparingDouble(
+        shape -> shape.points().isEmpty() ? Double.NaN : shape.points().get(0).y()));
     logger.debug("Sorted shapes by First Point Y coordinate.");
   }
 

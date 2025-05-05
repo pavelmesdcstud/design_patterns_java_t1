@@ -9,7 +9,7 @@ import java.util.Objects;
 import lt.esdc.shapes.entity.Point;
 import lt.esdc.shapes.entity.Quadrilateral;
 import lt.esdc.shapes.entity.Shape;
-import lt.esdc.shapes.io.QuadrilateralStringParser;
+import lt.esdc.shapes.parser.QuadrilateralStringParser;
 import lt.esdc.shapes.io.ShapeFileReader;
 import lt.esdc.shapes.repository.Repository;
 import lt.esdc.shapes.repository.spec.ByAreaRangeSpecification;
@@ -30,7 +30,8 @@ public class Main {
 
     ClassLoader classLoader = Main.class.getClassLoader();
     Path p = Paths.get(Objects.requireNonNull(classLoader.getResource("data.txt")).toURI());
-    ShapeFileReader<Quadrilateral> shapeFileReader = new ShapeFileReader<>(p, new QuadrilateralStringParser());
+    ShapeFileReader<Quadrilateral> shapeFileReader = new ShapeFileReader<>(p,
+        new QuadrilateralStringParser());
 
     Repository repository = Repository.getInstance();
     Warehouse warehouse = Warehouse.getInstance();
@@ -55,7 +56,8 @@ public class Main {
 
     // --- Demonstrate Observer ---
     logger.info("--- Demonstrating Observer on Parameter Change ---");
-    if (!repository.getAll().isEmpty() && repository.getAll().getFirst() instanceof Quadrilateral firstQuad) {
+    if (!repository.getAll().isEmpty() && repository.getAll()
+        .getFirst() instanceof Quadrilateral firstQuad) {
       String idToModify = firstQuad.id();
       logger.info("Modifying shape ID: {}", idToModify);
       warehouse.getParameters(idToModify).ifPresent(params ->
@@ -63,7 +65,8 @@ public class Main {
               idToModify, params.area(), params.perimeter()));
       List<Point> currentPoints = firstQuad.points();
       List<Point> newPoints = List.of(
-          new Point(currentPoints.get(0).x() + 10, currentPoints.get(0).y() + 10), // Shift first point
+          new Point(currentPoints.get(0).x() + 10, currentPoints.get(0).y() + 10),
+          // Shift first point
           currentPoints.get(1),
           currentPoints.get(2),
           currentPoints.get(3)
@@ -75,7 +78,7 @@ public class Main {
             logger.debug("AFTER Change  - ID: {}, Area: {}, Perimeter: {}",
                 idToModify, params.area(), params.perimeter()));
 
-      } catch(IllegalArgumentException e) {
+      } catch (IllegalArgumentException e) {
         logger.error("Failed to set new points for shape {}: {}", idToModify, e.getMessage());
         warehouse.getParameters(idToModify).ifPresent(params ->
             logger.warn("AFTER FAILED Change - ID: {}, Area: {}, Perimeter: {}",
@@ -97,7 +100,8 @@ public class Main {
         warehouse.getArea(s.id())));
 
     // 2. Square shapes
-    IsSquareSpecification squareSpec = new IsSquareSpecification(new QuadrilateralService(new PointService()));
+    IsSquareSpecification squareSpec = new IsSquareSpecification(
+        new QuadrilateralService(new PointService()));
     List<Shape> squareShapes = repository.query(squareSpec);
     logger.info("Square shapes: {}", squareShapes.size());
     squareShapes.forEach(s -> logger.debug("  - {}", s.id()));
@@ -112,11 +116,13 @@ public class Main {
     logger.info("--- Sorting Repository ---");
 
     logger.info("Shapes before sorting:");
-    repository.getAll().forEach(s -> logger.debug("  - ID: {}, Area: {}", s.id(), warehouse.getArea(s.id())));
+    repository.getAll()
+        .forEach(s -> logger.debug("  - ID: {}, Area: {}", s.id(), warehouse.getArea(s.id())));
 
     repository.sortByArea(); // Sort by area
     logger.info("Shapes after sorting by Area:");
-    repository.getAll().forEach(s -> logger.debug("  - ID: {}, Area: {}", s.id(), warehouse.getArea(s.id())));
+    repository.getAll()
+        .forEach(s -> logger.debug("  - ID: {}, Area: {}", s.id(), warehouse.getArea(s.id())));
 
     repository.sortById(); // Sort by ID
     logger.info("Shapes after sorting by ID:");

@@ -1,4 +1,4 @@
-package lt.esdc.shapes.io;
+package lt.esdc.shapes.parser;
 
 import lt.esdc.shapes.exception.MalformedInputStringException;
 
