@@ -18,16 +18,12 @@ public class Warehouse implements ShapeObserver {
   private final Map<String, ShapeParameters> parametersCache;
   private final QuadrilateralService quadrilateralService; // Needs service for calculations
 
-  // Private constructor for Singleton
   private Warehouse() {
     parametersCache = new HashMap<>();
-    // Ideally, inject this dependency, but for simplicity here, we create it.
-    // Or make QuadrilateralService a Singleton too.
     this.quadrilateralService = new QuadrilateralService(new PointService());
     logger.info("Warehouse initialized.");
   }
 
-  // Non-thread-safe getInstance() method
   public static Warehouse getInstance() {
     if (instance == null) {
       instance = new Warehouse();
@@ -95,13 +91,11 @@ public class Warehouse implements ShapeObserver {
       ShapeParameters params = new ShapeParameters(area, perimeter);
       parametersCache.put(quad.id(), params);
     } catch (Exception e) {
-      // Catch potential exceptions during calculation (e.g., invalid shape state)
       logger.error("Failed to calculate parameters for shape ID: {}", quad.id(), e);
       parametersCache.remove(quad.id()); // Remove potentially stale data
     }
   }
 
-  // Helper for easy access in Comparators/Specifications
   public double getArea(String shapeId) {
     return getParameters(shapeId).map(ShapeParameters::area).orElse(Double.NaN);
   }

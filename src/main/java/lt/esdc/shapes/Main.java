@@ -128,8 +128,6 @@ public class Main {
     logger.info("Shapes after sorting by ID:");
     repository.getAll().forEach(s -> logger.debug("  - ID: {}", s.id()));
 
-    // (Add calls to other sorting methods like sortByPerimeter, sortByFirstPointX etc.)
-
     logger.info("Application finished.");
   }
 }

@@ -18,13 +18,18 @@ class ShapeFileReaderTest {
     @TempDir
     Path tempDir;
 
-    @Test
-    void testValidShapesFile() throws IOException {
-        String content = """
+    private final static String VALID_SHAPES = """
             0,0;1,0;1,1;0,1
             0,0;2,0;2,1;0,1
             -1,-1;1,-1;1,1;-1,1""";
-        Path file = createTempFile(content);
+    private final static String INVALID_SHAPES = """
+            0,0;1,0;1,1;0,1
+            invalid_shape
+            0,0;2,0;2,1;0,1""";
+
+    @Test
+    void testValidShapesFile() throws IOException {
+        Path file = createTempFile(VALID_SHAPES);
 
         ShapeFileReader<Quadrilateral> reader = new ShapeFileReader<>(file,
             new QuadrilateralStringParser());
@@ -35,11 +40,7 @@ class ShapeFileReaderTest {
 
     @Test
     void testMixedValidAndInvalidShapes() throws IOException {
-        String content = """
-            0,0;1,0;1,1;0,1
-            invalid_shape
-            0,0;2,0;2,1;0,1""";
-        Path file = createTempFile(content);
+        Path file = createTempFile(INVALID_SHAPES);
 
         ShapeFileReader<Quadrilateral> reader = new ShapeFileReader<>(file,
             new QuadrilateralStringParser());

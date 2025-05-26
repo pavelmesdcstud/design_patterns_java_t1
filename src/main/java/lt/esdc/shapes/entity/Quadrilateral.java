@@ -91,14 +91,13 @@ public class Quadrilateral implements Shape, ObservableShape {
     }
 
     Quadrilateral that = (Quadrilateral) o;
-    return id.equals(that.id) && points.equals(that.points) && observers.equals(that.observers);
+    return id.equals(that.id) && points.equals(that.points);
   }
 
   @Override
   public int hashCode() {
     int result = id.hashCode();
     result = 31 * result + points.hashCode();
-    result = 31 * result + observers.hashCode();
     return result;
   }
 }
